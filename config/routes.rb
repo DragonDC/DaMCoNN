@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
-  resources :microposts
   resources :users
+  resources :microposts,          only: [:create, :destroy]
   #resources :account_activations, only: [:edit]
     
   # The priority is based upon order of creation: first created -> highest priority.

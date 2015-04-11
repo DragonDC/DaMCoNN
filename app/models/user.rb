@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   #attr_accessor :remember_token, :activation_token
+  has_many :microposts, dependent: :destroy  
   before_save   :downcase_email
   #before_create :create_activation_digest
   validates :name,  presence: true, length: { maximum: 50 }
@@ -49,6 +50,12 @@ class User < ActiveRecord::Base
     def downcase_email
       self.email = email.downcase
     end
+    
+  # Defines a proto-feed.
+  # See "Following users" for the full implementation.
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
 
     # Creates and assigns the activation token and digest.
 #    def create_activation_digest
