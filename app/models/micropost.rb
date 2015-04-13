@@ -6,6 +6,19 @@ class Micropost < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 140 }
   validate  :picture_size
     
+    
+  
+
+def self.search(search)
+  if search
+    find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+  else
+    find(:all)
+  end
+end
+
+   
+    
   private
 
     # Validates the size of an uploaded picture.

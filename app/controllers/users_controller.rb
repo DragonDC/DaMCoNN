@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Witamy w DaMCoNN!"
       redirect_to @user
     else
       render 'new'
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "Użytkownik usunięty"
     redirect_to users_url
   end    
 
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "Profil zaktualizowany"
       redirect_to @user
     else
       render 'edit'
@@ -53,14 +53,14 @@ class UsersController < ApplicationController
   end
     
   def following
-    @title = "Following"
+    @title = "Obserwowani"
     @user  = User.find(params[:id])
     @users = @user.following.paginate(page: params[:page])
     render 'show_follow'
   end
 
   def followers
-    @title = "Followers"
+    @title = "Obserwujący"
     @user  = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
